@@ -6,15 +6,15 @@
 #include <algorithm>
 #include <fstream>
 using namespace std;
-#define Cities 5
-float solution(float graph[][Cities], int start)
+#define DESTINATIONS 5
+float solution(float graph[][DESTINATIONS], int start)
 {
 	ofstream printer;
 	printer.open("output.txt");
 
 	vector<int> vertex;
-	int path[Cities], temp[Cities];
-	for (int i = 0; i < Cities; i++)
+	int path[DESTINATIONS], temp[DESTINATIONS];
+	for (int i = 0; i < DESTINATIONS; i++)
 		if (i != start)
 			vertex.push_back(i);
 	float min_path = INT_MAX;
@@ -30,9 +30,9 @@ float solution(float graph[][Cities], int start)
 			temp[i] = k;
 		}
 		current_pathweight += graph[k][start];
-		for (int i = 0; i < Cities - 1; i++)
+		for (int i = 0; i < DESTINATIONS - 1; i++)
 		{
-			if (i == Cities - 2)
+			if (i == DESTINATIONS - 2)
 			{
 				cout << temp[i] + 1 << endl;
 				printer << temp[i] + 1 << endl;
@@ -48,7 +48,7 @@ float solution(float graph[][Cities], int start)
 		min_path = min(min_path, current_pathweight);
 		if (min_path == current_pathweight)
 		{
-			for (int i = 0; i < Cities - 1; i++)
+			for (int i = 0; i < DESTINATIONS - 1; i++)
 			{
 				path[i] = temp[i];
 			}
@@ -56,9 +56,9 @@ float solution(float graph[][Cities], int start)
 
 	} while (next_permutation(vertex.begin(), vertex.end()));
 	cout << start + 1 << " to ";
-	for (int i = 0; i < Cities - 1; i++)
+	for (int i = 0; i < DESTINATIONS - 1; i++)
 	{
-		if (i == Cities - 2)
+		if (i == DESTINATIONS - 2)
 		{
 			cout << path[i] + 1 << " to " << start + 1 << endl;
 			printer << path[i] + 1 << " to " << start + 1 << endl;
@@ -77,7 +77,7 @@ int main()
 {
 	// Adjacency Matrix w/ Wt in miles
 // 1 = Reno  2 = Salt Lake City  3 = Seattle  4 = Denver  5 = Yellowstone Ntnl. Park
-	float graph[][Cities] = { 
+	float graph[][DESTINATIONS] = { 
 		{ 0, 518, 702, 1030, 719 },
 		{ 518, 0, 829, 518, 321 },
 		{ 702, 829, 0, 1303, 739 },
